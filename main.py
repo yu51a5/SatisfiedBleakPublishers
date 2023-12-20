@@ -3,9 +3,9 @@ import os
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
-queries = [        
-          """SELECT DISTINCT quarter FROM `fh-bigquery.stackoverflow_archive_questions.merged` ORDER BY quarter DESC LIMIT 1
-          """
+queries = [   
+          """SELECT quarter FROM `fh-bigquery.stackoverflow_archive_questions.merged` ORDER BY quarter DESC LIMIT 1""",
+          """SELECT creation_date FROM `fh-bigquery.stackoverflow_archive_questions.merged` ORDER BY creation_date DESC LIMIT 1"""
 ]
 
 #The purpose of this basic project is to  select the shortest StackOverflow questions containing "hello" and "world".
@@ -23,7 +23,7 @@ for i, q in enumerate(queries):
 # SQL dialect reference: https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions
   query_job = client.query(q)
   results = query_job.result()  # Waits for job to complete.
-  print(f"\nResults Of Query {i}:")
+  print(f"\nResult of query\n''{q}''\nis:")
   for row in results:
     print(row)
 
